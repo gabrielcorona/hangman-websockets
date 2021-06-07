@@ -1,5 +1,7 @@
 package com.coronadev.websocket;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -8,6 +10,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class HangmanConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
