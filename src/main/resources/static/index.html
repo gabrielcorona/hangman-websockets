@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman WebSockets</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+<div id="login-mask"></div>
+<div id="login"><h1>HangMan Game</h1><input type="text" id="username" name="username"><button id="login-button">Login</button></div>
+<div id="main-content" class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="name">Guess the word</label>
+                    <input type="text" id="guess" class="form-control" placeholder="You can guess...">
+                </div>
+                <button id="send" class="btn btn-default" type="submit">Send</button>
+                <select id="user-sessions">
+                	<option value="-1">Available Game Sessions</option>
+                	<option value="CREATE">Create New Game</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+        	<table class="hangman-progress">
+        		<tr>
+        			<td>
+        				<div id="hangman" class="status-1"></div>
+        				<h3 id="word-guess"></h3>
+        			</td>
+        			<td>
+			            <table id="conversation" class="table table-striped">
+			                <thead>
+			                <tr>
+			                    <th>Player</th>
+			                    <th>Session</th>
+			                    <th>Used Letters</th>
+			                    <th>Damage</th>
+			                    <th>Game Status</th>
+			                </tr>
+			                </thead>
+			                <tbody id="log">
+			                </tbody>
+			            </table>
+			         </td>
+			    </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
