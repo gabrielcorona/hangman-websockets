@@ -54,7 +54,7 @@ public class WebsocketIntegrationTests {
 	}
 
 	@Test
-	public void getStatus() throws Exception {
+	public void getGreeting() throws Exception {
 
 		final CountDownLatch latch = new CountDownLatch(1);
 		final AtomicReference<Throwable> failure = new AtomicReference<>();
