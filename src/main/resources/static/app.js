@@ -22,7 +22,8 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         stompClient.subscribe('/hangman/updates', function (status) {
-            showStatus(JSON.parse(status.body));
+        	showStatus(JSON.parse(status.body));
+            
         });
     });
 }
@@ -43,7 +44,12 @@ function sendName() {
 }
 
 function showStatus(message) {
-	setStatusObj(message)	
+	if(status != null){
+  		if(status.session==message.session)
+  			setStatusObj(message)
+  	}else{
+  		setStatusObj(message)
+  	}
 	checkComplete()
     $("#log").append("<tr><td>"+message.playerID+"</td><td>"+message.session+"</td><td>" + message.uselessLetters + "</td><td>"+message.damage+"</td><td>"+message.currentStatus+"</td></tr>");
     $("#hangman").attr("class","status-"+message.damage);

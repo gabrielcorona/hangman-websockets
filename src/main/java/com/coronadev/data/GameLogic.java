@@ -21,6 +21,7 @@ public class GameLogic {
 		
 		// If there is an action to evaluate we will evaluate the input, else we will just return the same status.
 		if(!action.getLetter().isEmpty()) {
+			
 			// If the word guessed is the same as the word we are looking for the game ends in status "WIN" and we reveal the word.
 			if(status.getWord().equals(letter)) { 
 				status.setWordProgress(letter);

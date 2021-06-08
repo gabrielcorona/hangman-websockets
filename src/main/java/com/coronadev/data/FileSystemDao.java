@@ -54,6 +54,7 @@ public class FileSystemDao implements Dao {
 	private Status parseStatus(String line) {
 		Status status = new Status();
 		String[] properties = line.split("\\|");
+		
 		for(String prop:properties) {
 			String[] data = prop.split(":");
 			switch(data[0]) {
