@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * FileSystemDao.java
@@ -57,19 +58,24 @@ public class FileSystemDao implements Dao {
 		
 		for(String prop:properties) {
 			String[] data = prop.split(":");
+			String value = "";
+			if(data.length > 1) {
+				value = data[1];
+			}
 			switch(data[0]) {
-			case "playerID":status.setPlayerID(data[1]);break;
-			case "session":status.setSession(data[1]);break;
-			case "word":status.setWord(data[1]);break;
-			case "wordProgress":status.setWordProgress(data[1]);break;
-			case "uselessLetters":status.setUselessLetters(Arrays.asList(data[1].split(",")));break;
+			case "playerID":status.setPlayerID(value);break;
+			case "versus":status.setVersus(new TreeSet<String>(Arrays.asList(value.replaceAll("\\[","").replaceAll("\\]","").replaceAll(" ","").split(","))));break;
+			case "session":status.setSession(value);break;
+			case "word":status.setWord(value);break;
+			case "wordProgress":status.setWordProgress(value);break;
+			case "uselessLetters":status.setUselessLetters(Arrays.asList(value.replaceAll("\\[","").replaceAll("\\]","").replaceAll(" ","").split(",")));break;
 			case "damage":
-				String damage = data[1].trim();
+				String damage = value.trim();
 				if(damage.isEmpty() || damage.equals(" "))
 					damage = "0";
 				status.setDamage(Integer.parseInt(damage));
 			break;
-			case "gameState":status.setCurrentStatus(GameState.valueOf(data[1]));break;
+			case "gameState":status.setCurrentStatus(GameState.valueOf(value));break;
 			}
 		}
 		
@@ -129,7 +135,10 @@ public class FileSystemDao implements Dao {
 	public Status generateSession(String username) {		
 		Status status = new Status();
 		status.setPlayerID(username);
-		status.setSession(username+System.currentTimeMillis());
+		TreeSet<String> versus = new TreeSet<String>();
+		versus.add(username);
+		status.setVersus(versus);
+		status.setSession(username+System.currentTimeMillis());		
 		status.setWord(getWord());
 		status.setWordProgress(setEmptyProgress(status.getWord().length()));
 		status.setUselessLetters(new ArrayList<String>());
@@ -172,8 +181,14 @@ public class FileSystemDao implements Dao {
 	
 	// Finds the Status by the provided session ID.
 	@Override
-	public Status getStatusBySession(String session) {
-		return sessions.get(session);
+	public Status getStatusBySession(Status status) {
+		String player = status.getPlayerID();
+		status = sessions.get(status.getSession());
+		TreeSet<String> versus = status.getVersus();
+		if(!versus.contains(player))
+			versus.add(player);
+		status.setVersus(versus);
+		return status;
 	}
 	
 	// Gets a list of session related to an specified user name.

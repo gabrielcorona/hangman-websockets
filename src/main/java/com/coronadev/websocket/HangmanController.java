@@ -21,9 +21,9 @@ public class HangmanController {
 	public Status setAction(Action action) {
 		Status status = action.getStatus();
 		if(action.getLetter().equals("[LOADING]")) {
-			status = dao.getStatusBySession(status.getSession());
+			status = dao.getStatusBySession(status);
 		}else {
-			status = logic.evaluateAction(action);		
+			status = logic.evaluateAction(action);
 			dao.updateStatus(status);
 		}
 		return status;

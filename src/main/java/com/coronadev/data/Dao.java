@@ -10,7 +10,7 @@ import java.util.List;
 public interface Dao {	
 	
 	// Finds the Status by the provided session ID.
-	public Status getStatusBySession(String session);
+	public Status getStatusBySession(Status status);
 	
 	// Gets a list of session related to an specified user name.
 	public List<String> getUserSessions(String username);

@@ -73,7 +73,7 @@ public class WebsocketIntegrationTests {
 					public void handleFrame(StompHeaders headers, Object payload) {
 						Status status = (Status) payload;
 						try {
-							assertEquals("playerID:|session:|word:|wordProgress:|uselessLetters:[]|damage:0|gameState:STAND_BY",status.toString());
+							assertEquals("playerID:|versus:[]|session:|word:|wordProgress:|uselessLetters:[]|damage:0|gameState:STAND_BY",status.toString());
 						} catch (Throwable t) {
 							failure.set(t);
 						} finally {
@@ -104,7 +104,7 @@ public class WebsocketIntegrationTests {
 			}
 		}
 		else {
-			fail("Greeting not received");
+			fail("Status not received");
 		}
 
 	}

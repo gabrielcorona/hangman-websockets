@@ -63,6 +63,29 @@ public class GameLogic {
 			usedLetters.add(letter);
 			status.setUselessLetters(usedLetters);
 		}
+		if(!status.getCurrentStatus().equals(GameState.LOSE) && !status.getCurrentStatus().equals(GameState.WIN))
+			status = getNextTurn(status);
+		return status;
+	}
+
+	private Status getNextTurn(Status status) {
+		String nextPlayer = "";
+		boolean foundPlayer = false;
+		if(status.getVersus().size() > 1) {
+			for(String player: status.getVersus()) {				
+				if(nextPlayer.isEmpty())
+					nextPlayer = player;
+				
+				if(foundPlayer) {
+					nextPlayer = player;
+					break;
+				}
+				if(status.getPlayerID().equals(player)) {
+					foundPlayer = true;					
+				}				
+			}
+			status.setPlayerID(nextPlayer);
+		}
 		return status;
 	}
 }

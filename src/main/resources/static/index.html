@@ -17,17 +17,21 @@
 <div id="login"><h1>HangMan Game</h1><input type="text" id="username" name="username"><button id="login-button">Login</button></div>
 <div id="main-content" class="container">
     <div class="row">
+    	<div class="share-link"><input id="sessionID" type="text"><img src="/share.png" height="34" id="share"></div>
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
                     <label for="name">Guess the word</label>
                     <input type="text" id="guess" class="form-control" placeholder="You can guess...">
+                    <button id="send-guess" class="btn btn-default" type="submit">Send</button>
+                </div>                
+                <div class="form-group">
+                	<select id="user-sessions">
+	                	<option value="-1">Available Game Sessions</option>
+	                	<option value="CREATE">Create New Game</option>
+	                </select>
                 </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-                <select id="user-sessions">
-                	<option value="-1">Available Game Sessions</option>
-                	<option value="CREATE">Create New Game</option>
-                </select>
+                
             </form>
         </div>
     </div>
@@ -39,6 +43,7 @@
         			<td>
         				<div id="hangman" class="status-1"></div>
         				<h3 id="word-guess"></h3>
+        				<div id="players-list"></div>
         			</td>
         			<td>
 			            <table id="conversation" class="table table-striped">

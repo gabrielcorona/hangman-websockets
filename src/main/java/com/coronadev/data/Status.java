@@ -2,13 +2,15 @@ package com.coronadev.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class Status {
 	private String players;
+	private TreeSet<String> versus;
 	private String session;
 	private String word;
 	private String wordProgress;
-	private List<String> uselessLetters;	
+	private List<String> uselessLetters;
 	private Integer damage;
 	private GameState currentStatus;
 	
@@ -22,6 +24,15 @@ public class Status {
 	public void setPlayerID(String playerID) {
 		this.players = playerID;
 	}
+	
+	public TreeSet<String> getVersus() {
+		return versus;
+	}
+
+	public void setVersus(TreeSet<String> versus) {
+		this.versus = versus;
+	}
+
 	public String getSession() {
 		return session;
 	}
@@ -61,6 +72,7 @@ public class Status {
 	
 	public void initDefault() {
 		this.players = "";
+		this.versus = new TreeSet<String>();
 		this.session = "";
 		this.word = "";
 		this.wordProgress = "";
@@ -72,6 +84,7 @@ public class Status {
 	@Override
 	public String toString() {
 		return 	"playerID:"+this.players+"|"+
+				"versus:"+this.versus.toString()+"|"+
 				"session:"+this.session+"|"+
 				"word:"+this.word+"|"+
 				"wordProgress:"+this.wordProgress+"|"+
